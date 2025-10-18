@@ -151,6 +151,6 @@ public class FlightSearch {
    public String toString() {
       return departureDate + ", " + departureAirportCode + ", " + emergencyRowSeating
               + ", " + returnDate + ", " + destinationAirportCode + ", " + seatingClass
-              + ", " + adultPassengerCount + ", " + childPassengerCount + ", " + infantPassengerCount;
+              + ", " + adultPassengerCount + ", " + childPassengerCount + ", " + infantPassengerCount + "\n";
    }
 }
