@@ -17,6 +17,48 @@ public class FlightSearch {
    private int     childPassengerCount;
    private int     infantPassengerCount;
 
+   public FlightSearch() {}
+
+   public String getDepartureDate() {
+      return departureDate;
+   }
+
+   public String getDepartureAirportCode() {
+      return departureAirportCode;
+   }
+
+   public boolean isEmergencyRowSeating() {
+      return emergencyRowSeating;
+   }
+
+   public String getReturnDate() {
+      return returnDate;
+   }
+
+   public String getDestinationAirportCode() {
+      return destinationAirportCode;
+   }
+
+   public String getSeatingClass() {
+      return seatingClass;
+   }
+
+   public int getAdultPassengerCount() {
+      return adultPassengerCount;
+   }
+
+   public int getChildPassengerCount() {
+      return childPassengerCount;
+   }
+
+   public int getInfantPassengerCount() {
+      return infantPassengerCount;
+   }
+
+   public int getTotalPassengers(int adultPassengerCount, int childPassengerCount, int infantPassengerCount) {
+      return adultPassengerCount +  childPassengerCount + infantPassengerCount;
+   }
+
    public boolean runFlightSearch(String departureDate, String departureAirportCode, boolean emergencyRowSeating,
                                   String returnDate, String destinationAirportCode, String seatingClass,
                                   int adultPassengerCount, int childPassengerCount, int infantPassengerCount) {
@@ -80,7 +122,7 @@ public class FlightSearch {
       if (!validClasses.contains(seatingClass))
          valid = false;
 
-      // 10. Emergency row allowed only in economy
+      // 10. Only economy class seating can have an emergency row (all classes of seating can be non-emergency).
       if (emergencyRowSeating && !seatingClass.equals("economy"))
          valid = false;
 
@@ -103,5 +145,12 @@ public class FlightSearch {
          this.infantPassengerCount = infantPassengerCount;
       }
       return valid;
+   }
+
+   @Override
+   public String toString() {
+      return departureDate + ", " + departureAirportCode + ", " + emergencyRowSeating
+              + ", " + returnDate + ", " + destinationAirportCode + ", " + seatingClass
+              + ", " + adultPassengerCount + ", " + childPassengerCount + ", " + infantPassengerCount;
    }
 }
