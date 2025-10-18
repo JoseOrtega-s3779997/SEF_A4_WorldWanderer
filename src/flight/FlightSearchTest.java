@@ -222,4 +222,43 @@ public class FlightSearchTest {
                 "25/11/2025", "syd", "economy", 1, 0, 0));
         assertEquals(0, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
     }
+
+    // -----------------------
+    // Condition 12: Valid inputs
+    // -----------------------
+    @Test
+    public void testCondition12_ValidInput() {
+        FlightSearch f = new FlightSearch();
+
+        // Case 1: economy, no emergency, 1 adult, 1 child
+        assertEquals(0, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+        assertTrue(f.runFlightSearch("20/11/2025", "mel", false,
+                "25/11/2025", "pvg", "economy", 1, 1, 0));
+        assertEquals(2, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+
+        f = new FlightSearch();
+
+        // Case 2: economy with emergency row allowed, adults only
+        assertEquals(0, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+        assertTrue(f.runFlightSearch("01/12/2025", "syd", true,
+                "10/12/2025", "lax", "economy", 2, 0, 0));
+        assertEquals(2, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+
+        f = new FlightSearch();
+
+        // Case 3: premium economy, no emergency, 2 adults, 4 children, 2 infants
+        assertEquals(0, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+        assertTrue(f.runFlightSearch("05/12/2025", "mel", false,
+                "12/12/2025", "pvg", "premium economy", 2, 4, 2));
+        assertEquals(8, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+
+        f = new FlightSearch();
+
+        // Case 4: first class, no emergency, single adult
+        assertEquals(0, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+        assertTrue(f.runFlightSearch("10/03/2026", "del", false,
+                "20/03/2026", "doh", "first", 1, 0, 0));
+        assertEquals(1, f.getTotalPassengers(f.getAdultPassengerCount(), f.getChildPassengerCount(), f.getInfantPassengerCount()));
+    }
+
 }
